@@ -1,0 +1,9 @@
+{
+	"Register": {
+		"fistname": "Automation",
+		"lastname": "Testing",
+		"company": "Auto Testing",
+		"email": "autotest",
+		"password": "123123"
+	}
+}

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Live Guru" parallel="tests" thread-count="2">
+
+<parameter name="url" value="http://live.demoguru99.com/index.php/backendlogin/customer" />
+
+<!--   <test name="Run on FIREFOX"> -->
+<!--   <parameter name="browser" value="firefox" /> -->
+  
+<!--     <classes> -->
+<!--       <class name="com.liveguru.users.Level_05_Factory_Pattern"/> -->
+<!--     </classes> -->
+<!--   </test> -->
+   
+   <test name="Run on CHROME">
+  <parameter name="browser" value="chrome" />
+    <classes>
+      <class name="com.liveguru.users.Level_10_Data_Table"/>
+    </classes>
+  </test>
+  
+<!--    <test name="Run on COCCOC"> -->
+<!--   <parameter name="browser" value="coccoc" /> -->
+<!--     <classes> -->
+<!--       <class name="com.liveguru.users.Level_03_Multiple_Browser"/> -->
+<!--     </classes> -->
+<!--   </test> -->
+  
+<!--    <test name="Run on IE"> -->
+<!--   <parameter name="browser" value="ie" /> -->
+<!--     <classes> -->
+<!--       <class name="com.liveguru.users.Level_03_Multiple_Browser"/> -->
+<!--     </classes> -->
+<!--   </test> -->
+   </suite> 

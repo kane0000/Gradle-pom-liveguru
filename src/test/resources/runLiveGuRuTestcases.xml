@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Live Guru" parallel="false">
+
+	<parameter name="url" value="http://live.demoguru99.com/" />
+
+	<!-- Sử dụng cho Soft_Assert -->
+	<listeners>
+		<listener class-name="commons.MethodListener" />
+		<listener class-name="reportConfig.AllureTestListener" />
+		<listener class-name = "reportConfig.ExtentListener"/>
+		<listener class-name = "org.uncommons.reportng.HTMLReporter"/>
+		<listener class-name = "org.uncommons.reportng.JUnitXMLReporter"/>
+	</listeners>
+
+	<test name="Run on CHROME">
+		<parameter name="browser" value="chrome" />
+		<classes>
+			<!-- <class name="com.liveguru.users.Common_01_Register"/> -->
+			<!-- <class name="com.liveguru.users.Level_14_Share_State"/> -->
+			<class name="com.liveguru.users.Level_15_Dynamic_Input_Textbox" />
+		</classes>
+	</test>
+
+</suite> 

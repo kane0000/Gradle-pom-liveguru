@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Run on CHROME"
+           tests="3"
+           failures="0"
+           errors="0"
+           skipped="0"
+           time="11.509">
+  <properties />
+  
+  
+            <testcase name="TC_02_Login" time="2.496" classname="com.liveguru.users.Level_15_Dynamic_Input_Textbox" />
+                <testcase name="TC_01_Register" time="6.002" classname="com.liveguru.users.Level_15_Dynamic_Input_Textbox" />
+                <testcase name="TC_03_Add_Address_Book" time="3.011" classname="com.liveguru.users.Level_15_Dynamic_Input_Textbox" />
+      
+</testsuite>

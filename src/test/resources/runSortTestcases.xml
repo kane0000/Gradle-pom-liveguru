@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Saucelab Sort" parallel="false" thread-count="2">
+
+<parameter name="url" value="https://www.saucedemo.com/inventory.html" />
+ 
+<listeners>
+<listener class-name = "commons.MethodListener"/>
+<listener class-name = "reportConfig.ExtentListener"/>
+<listener class-name = "org.uncommons.reportng.HTMLReporter"/>
+<listener class-name = "org.uncommons.reportng.JUnitXMLReporter"/>
+</listeners>
+
+<!--    <test name="Run on CHROME"> -->
+<!--   <parameter name="browser" value="chrome" /> -->
+<!--     <classes> -->
+<!--       <class name="com.saucelab.sort.Sort_Asc_Desc"/> -->
+<!--     </classes> -->
+<!--   </test> -->
+  
+<!--    <test name="Run on FIREFOX"> -->
+<!--   <parameter name="browser" value="firefox" /> -->
+<!--     <classes> -->
+<!--       <class name="com.saucelab.sort.Sort_Asc_Desc"/> -->
+<!--     </classes> -->
+<!--   </test> -->
+  
+   <test name="Run on IE">
+  <parameter name="browser" value="ie" />
+    <classes>
+      <class name="com.saucelab.sort.Sort_Asc_Desc"/>
+    </classes>
+  </test>
+  
+   </suite> 
