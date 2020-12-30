@@ -50,20 +50,15 @@ public abstract class AbstractTest {
 
 	private static ThreadLocal<WebDriver> threadLocalDriver = new ThreadLocal<WebDriver>();
 
-// Hàm dùng chung cho testcases (test class)
 	// protected
 	protected void removeDriver() {
 		try {
-			// get ra tên của OS và convert qua chữ thường
 			String osName = System.getProperty("os.name").toLowerCase();
 			log.info("OS name = " + osName);
 
-			// Khai báo 1 biến command line để thực thi
 			String cmd = "";
 			// close browser
 			if (getDriver() != null) {
-				// Apply for IE browser ( IE sẽ lưu lại thông tin chạy lần 1, chạy lần 2 sẽ fail
-				// nên cần phải xoá cookies, các browser khác không cần )
 				getDriver().manage().deleteAllCookies();
 				getDriver().quit();
 			}
@@ -132,7 +127,7 @@ public abstract class AbstractTest {
 			options.addPreference("browser.download.useDownloadDir", true);
 			options.addPreference("browser.helperApps.neverAsk.saveToDisk", "application/pdf");
 			options.addPreference("pdfjs.disabled", true);
-			// chạy ở chế độ ẩn danh ( nếu như không muốn lưu lại lịch sử chạy)
+			// cháº¡y á»Ÿ cháº¿ Ä‘á»™ áº©n danh ( náº¿u nhÆ° khÃ´ng muá»‘n lÆ°u láº¡i lá»‹ch sá»­ cháº¡y)
 			options.addArguments("-private");
 			setDriver(new FirefoxDriver(options));
 
@@ -155,13 +150,12 @@ public abstract class AbstractTest {
 
 			ChromeOptions options = new ChromeOptions();
 			options.addExtensions(translate);
-			// setting bằng tiếng việt,Anh,...
+			// setting bằng tiếng Việt,Anh,...
 			options.addArguments("--lang=vi");
-			// tắt dòng ướng dụng kiểm soát bởi phần mềm tự động
 			options.setExperimentalOption("useAutomationExtension", false);
 			options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
 			options.setExperimentalOption("prefs", chromePrefs);
-			// chạy ở chế độ ẩn danh
+			// chạy chế độ ẩn danh
 			options.addArguments("--incognito");
 
 			setDriver(new ChromeDriver(options));
@@ -204,7 +198,6 @@ public abstract class AbstractTest {
 		return rand.nextInt(999999);
 	}
 
-	// cách để chạy không dừng khi lỗi TC
 	private boolean checkTrue(boolean condition) {
 		boolean pass = true;
 		try {
@@ -221,7 +214,7 @@ public abstract class AbstractTest {
 		} catch (Throwable e) {
 			pass = false;
 
-			// Add lỗi vào ReportNG
+			// Add lá»—i vÃ o ReportNG
 			VerificationFailures.getFailures().addFailureForTest(Reporter.getCurrentTestResult(), e);
 			Reporter.getCurrentTestResult().setThrowable(e);
 		}
@@ -253,14 +246,12 @@ public abstract class AbstractTest {
 		return pass;
 	}
 
-	// ngaỳ giờ
 	protected String getDateNumber() {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date date = new Date();
 		return formatter.format(date).replace(":", "-").replace(" ", "-");
 	}
 
-	// ngày - tháng - năm
 	protected String getCurrentDay() {
 		DateTime nowUTC = new DateTime();
 		int day = nowUTC.getDayOfMonth();

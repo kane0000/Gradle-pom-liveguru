@@ -33,17 +33,6 @@ import pageUI.wordpress.admind.AbstractWordpressPageUI;
 import pageUIs.liveGuru.AbsTractPageUI;
 
 public abstract class AbstractPage {
-	// hàm dùng chung cho Package: PageObjects
-	// selenium API wrapper(core)
-
-	// Đóng gói những dòng code/ command thành 1 hàm (funtion)-> call funtion để sử dụng
-
-	// 1 - Set access modifier là public hết
-	// 2 - Tên hàm:lowerCase
-	// 3 - Tham số của hàm (param)
-	// 4 - Kiểu trả về (return type)
-	// 5 - sử dụng biến toàn cục hay cục bộ
-	// 47 hàm cơ bản
 
 	public void openPageUrl(WebDriver driver, String pageUrl) {
 		driver.get(pageUrl);
@@ -149,7 +138,7 @@ public abstract class AbstractPage {
 	public List<WebElement> finds(WebDriver driver, String xpathValue) {
 		return driver.findElements(byXpath(xpathValue));
 	}
-	// lấy ra locator tối ưu nhất để đại diện cho nhiều locator giống nhau(dùng %s: để đại diện)
+	
 	public String getDynamicLocator(String xpathValue, String... values) {
 		xpathValue = String.format(xpathValue, (Object[]) values);
 		return xpathValue;
@@ -157,7 +146,6 @@ public abstract class AbstractPage {
 	}
 	
 	public void clickToElement(WebDriver driver, String xpathValue) {
-		// dành cho IE
 		if (driver.toString().contains("internet explorer")) {
 			clickToElementByJS(driver, xpathValue);
 			sleepInSecond(3);
@@ -247,7 +235,6 @@ public abstract class AbstractPage {
 		return find(driver, xpathValue).getText();
 	}
 
-	// đếm xem được bao nhiêu Element
 	public int countElementNumber(WebDriver driver, String xpathValue) {
 		return finds(driver, xpathValue).size();
 	}
@@ -420,7 +407,7 @@ public abstract class AbstractPage {
 		explicitWait = new WebDriverWait(driver, longTimeout);
 		explicitWait.until(ExpectedConditions.invisibilityOfElementLocated(byXpath(getDynamicLocator(xpathValue,values))));
 	}
-	//Invisible số nhiều
+	//Invisible sá»‘ nhiá»�u
 	public void waitElementsInvisible(WebDriver driver, String xpathValue) {
 		explicitWait = new WebDriverWait(driver, longTimeout);
 		elements = finds(driver, xpathValue);
@@ -439,7 +426,6 @@ public abstract class AbstractPage {
 	public void overrideImplicitTimeout(WebDriver driver, long timeInSecond) {
 		driver.manage().timeouts().implicitlyWait(timeInSecond, TimeUnit.SECONDS);
 	}
-	// kiểm tra không hiển thị trên UI và trong DOM
 	public boolean isElementUndisplayed(WebDriver driver, String locator) {
 		overrideImplicitTimeout(driver, shortTimeout);
 		elements = finds(driver, locator);
@@ -464,70 +450,53 @@ public abstract class AbstractPage {
 			return false;
 		}
 	}
-	//Sort theo chuỗi(chữ)
-// Sort Ascending (sắp xếp tăng dần)	
 	public boolean isDataStringSortedAscending(WebDriver driver, String xpathValue) {
-		//khai báo array list
 		ArrayList<String>arrayList = new ArrayList<>();
-		//Tìm tất cả element Matching vs điều kiện (Name/Price...)
 		List<WebElement> elementList = finds(driver, xpathValue);
 		
-		// Lấy text của từng element add vào array list
 		for(WebElement element : elementList) {
 			arrayList.add(element.getText());
 		}
-		System.out.println("----------Dữ liệu trên UI----------");
+		System.out.println("----------Dá»¯ liá»‡u trÃªn UI----------");
 		for(String name : arrayList) {
 			System.out.println(name);
 		}
-		//Coppy qua 1 arayList mới để SORT trong Code
 		ArrayList<String>sortedList = new ArrayList<>();
 		for (String child: arrayList) {
 			sortedList.add(child);
 		}
-		// Thực hiện sort Asc
 		Collections.sort(sortedList);
-		System.out.println("----------Dữ liệu đã SORT ASC trong code:----------");
+		System.out.println("----------Dá»¯ liá»‡u Ä‘Ã£ SORT ASC trong code:----------");
 		for(String name:sortedList) {
 			System.out.println(name);
 		}
-		// Verify 2 array bằng nhau - nếu dữ liệu sort trên UI ko chính xác thì kết quả trả về sai
 		return sortedList.equals(arrayList);
 	}
-// Sort Descending( sắp xếp giảm dần dạng chuỗi)
 	public boolean isDataStringSortedDescending(WebDriver driver, String xpathValue) {
-		//khai báo array list
 				ArrayList<String>arrayList = new ArrayList<String>();
-				//Tìm tất cả element Matching vs điều kiện (Name/Price...)
 				List<WebElement> elementList = finds(driver, xpathValue);
 				
-				// Lấy text của từng element add vào array list
 				for(WebElement element : elementList) {
 					arrayList.add(element.getText());
 				}
-				System.out.println("----------Dữ liệu trên UI----------");
+				System.out.println("----------Dá»¯ liá»‡u trÃªn UI----------");
 				for(String name : arrayList) {
 					System.out.println(name);
 				}
-				//Coppy qua 1 arayList mới để SORT trong Code
 				ArrayList<String>sortedList = new ArrayList<>();
 				for (String child: arrayList) {
 					sortedList.add(child);
 				}
-				// Thực hiện sort Asc
 				Collections.sort(sortedList);
 				
-				//Reverse data để sort DESC (Dùng 1 trong 2 cách dưới)
 				Collections.reverse(sortedList);
 				//Collections.sort(arrayList,Collections.reverseOrder());
-				System.out.println("----------Dữ liệu đã SORT DESC trong code:----------");
+				System.out.println("----------Dá»¯ liá»‡u Ä‘Ã£ SORT DESC trong code:----------");
 				for(String name : sortedList) {
 					System.out.println(name);
 				}
-				// Verify 2 array bằng nhau - nếu dữ liệu sort trên UI ko chính xác thì kết quả trả về sai
 				return sortedList.equals(arrayList);
 	}
-	//Sort bằng số tăng dần
 	public boolean isPriceSortedAscending(WebDriver driver, String xpathValue) {
 		ArrayList<Float> arrayList = new ArrayList<Float>();
 		
@@ -536,7 +505,7 @@ public abstract class AbstractPage {
 			arrayList.add(Float.parseFloat(element.getText().replace("$", "").trim()));
 			
 		}
-		System.out.println("----------Dữ liệu trên UI----------");
+		System.out.println("----------Dá»¯ liá»‡u trÃªn UI----------");
 		for(Float name : arrayList) {
 			System.out.println(name);
 		}
@@ -545,13 +514,12 @@ public abstract class AbstractPage {
 			sortedList.add(child);
 		}
 		Collections.sort(sortedList);
-		System.out.println("----------Dữ liệu đã SORT ASC trong code:----------");
+		System.out.println("----------Dá»¯ liá»‡u Ä‘Ã£ SORT ASC trong code:----------");
 		for(Float name:sortedList) {
 			System.out.println(name);
 		}
 		return sortedList.equals(arrayList);
 	}
-	//Sort bằng số giảm dần
 	public boolean isPriceSortedDescending(WebDriver driver, String xpathValue) {
 		ArrayList<Float> arrayList = new ArrayList<Float>();
 		
@@ -560,7 +528,7 @@ public abstract class AbstractPage {
 			arrayList.add(Float.parseFloat(element.getText().replace("$", "").trim()));
 			
 		}
-		System.out.println("----------Dữ liệu trên UI----------");
+		System.out.println("----------Dá»¯ liá»‡u trÃªn UI----------");
 		for(Float name : arrayList) {
 			System.out.println(name);
 		}
@@ -570,7 +538,7 @@ public abstract class AbstractPage {
 		}
 		Collections.sort(sortedList);
 		Collections.reverse(sortedList);
-		System.out.println("----------Dữ liệu đã SORT DESC trong code:----------");
+		System.out.println("----------Dá»¯ liá»‡u Ä‘Ã£ SORT DESC trong code:----------");
 		for(Float name:sortedList) {
 			System.out.println(name);
 		}
@@ -598,7 +566,6 @@ public abstract class AbstractPage {
 		clickToElement(driver,  AbsTractPageUI.SEARCH_TERMS_LINK);
 		return PageGeneratorManager.getSearchTermsPage(driver);
 	}
-	// Kiểm tra đang sử dụng hệ điều hành nào để gán foldername vào
 	public String getDirectorySlash(String folderName) {
 		if (isMac() || isUnix() || isSolaris()) {
 			folderName = "/" + folderName + "/";
@@ -622,18 +589,15 @@ public abstract class AbstractPage {
 //Upload file
 	public void uploadMultipleFiles(WebDriver driver, String... fileNames) {
 		String filePath =System.getProperty("user.dir")+getDirectorySlash("uploadFiles");
-		// lấy ra đường dẫn của file
 		String fullFileName ="";
-		//Duyệt qua từng file để nối tất cả đường dẫn file vào
 		for (String file : fileNames) {
 			fullFileName = fullFileName +filePath + file + "\n";
 		}
-		// Cắt bỏ khoảng trắng( )/tab(\t)/xuống dòng(\n) đầu hoặc cuối chuỗi (hàm .trim())
 		fullFileName = fullFileName.trim();
 		sendkeyToElement(driver, AbsTractPageUI.UPLOAD_FILE_TYPE, fullFileName);
 	
 	}
-	// Verify Upload Thành công
+	// Verify Upload thành công
 	public boolean areFileUploadedDisplay(WebDriver driver, String... fileNames) {
 		boolean status = false;
 		int number = fileNames.length;
@@ -642,7 +606,6 @@ public abstract class AbstractPage {
 		elements = finds(driver, AbsTractPageUI.ALL_UPLOAD_IMAGE);
 		List<String> imageValues = new ArrayList<String>();
 		int i = 0;
-		// Lấy ra cái source value của nó = chứa cái tên hình
 		for(WebElement image : elements) {
 			System.out.println(image.getAttribute("src"));
 			imageValues.add(image.getAttribute("src"));
@@ -676,7 +639,6 @@ public abstract class AbstractPage {
 		clickToElement(driver,  AbsTractPageUI.ABOUT_US_LINK);
 		return PageGeneratorManager.getAboutUsPage(driver);
 	}
-	// Cách 1: Số lượng ít hơn 20 page
 	public AbstractPage openFooterPageLink(WebDriver driver,String pageName ) {
 		waitElementClickable(driver,  AbsTractPageUI.FOOTER_PAGE, pageName);;
 		clickToElement(driver, AbsTractPageUI.FOOTER_PAGE, pageName);
@@ -708,7 +670,7 @@ public abstract class AbstractPage {
 			return PageGeneratorManager.getContactUsPage(driver);
 		}
 	}
-	// Cách 2: Số lượng nhiều page
+	// CÃ¡ch 2: Sá»‘ lÆ°á»£ng nhiá»�u page
 	public void openFooterPageByName(WebDriver driver,String pageName ) {
 		waitElementClickable(driver,  AbsTractPageUI.FOOTER_PAGE, pageName);;
 		clickToElement(driver, AbsTractPageUI.FOOTER_PAGE, pageName);

@@ -3,7 +3,7 @@ package pageObjects.liveGuru;
 import org.openqa.selenium.WebDriver;
 
 public class PageGeneratorManager {
-	//khởi tạo các page
+	//Khởi tạo các page
 	public static HomePageObject getHomePage(WebDriver driver) {
 		return new HomePageObject(driver);
 	}
