@@ -5,6 +5,7 @@
 		value="https://automationfc.wordpress.com/wp-admin" />
 
 	<listeners>
+		<listener class-name="retryConfig.RetryListener" />
 		<listener class-name="commons.MethodListener" />
 		<listener class-name="reportConfig.ExtentListener" />
 		<listener class-name="org.uncommons.reportng.HTMLReporter" />
